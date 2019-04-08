@@ -16,18 +16,18 @@ public class TicTacToe_finalVersion {
 		int j;
 		int y;
 		int q;
-		String wert = "";
-		byte yaiks = 0;
+		String nextPlayer = "";
 		String gewinner = "G";
 		byte voll = 0;
-		System.out.println("Welcher Spieler soll beginnen?\n1 für \"X\", 2 für \"Y\"");
+		System.out.println("Welcher Spieler soll beginnen?\n1 fÃ¼r \"X\", 2 fÃ¼r \"Y\"");
 		String vorwahl = scanner.nextLine();
 		int auswahl = 0;
-		int ende = 0;
+		boolean running = true;
+		boolean going = true;
 		
 //		---------------------------------------         Game is starting  -->
 		
-		while (ende==0) {
+		while (running) {
 			
 			if (vorwahl.matches(".*[^1-2]+.*")) {
 				System.out.println("1 oder 2?");
@@ -38,12 +38,12 @@ public class TicTacToe_finalVersion {
 				System.out.println("Keine Buchstaben oder Sonderzeichen!");
 				while (auswahl <= 1 || auswahl >= 2) {
 					if (auswahl == 1) {
-						System.out.println("Spieler 1 fängt an");
-						ende=1;
+						System.out.println("Spieler 1 fÃ¤ngt an");
+						running=false;
 						break;
 					} else if (auswahl == 2) {
-						System.out.println("Spieler 2 fängt an");
-						ende=1;
+						System.out.println("Spieler 2 fÃ¤ngt an");
+						running=false;
 						break;
 					} else {
 						System.out.println("Bitte korrekte Zahl eingeben");
@@ -64,7 +64,7 @@ public class TicTacToe_finalVersion {
 				System.out.println("");
 		}
 		
-		while (yaiks == 0) {
+		while (going) {
 			System.out.println("Bitte Wert eingeben");
 			String spieler = spieler1.nextLine();
 			if (spieler.length()==2) {
@@ -81,26 +81,26 @@ public class TicTacToe_finalVersion {
 					if ((q>2 || q<0) || (y>2 || y<0) || ungueltig>22) {
 						System.err.println("Feld liegt nicht im Wertebereich!");
 					}
-					else if (spieler.equals(spielfeld[q][y])) {			// prüfen ob Feld schon belegt ist
+					else if (spieler.equals(spielfeld[q][y])) {			// prÃ¼fen ob Feld schon belegt ist
 																		
 						if (auswahl == 1){
-							wert = "X";
+							nextPlayer = "X";
 							auswahl=2;
 						}
 						else if (auswahl == 2) {
 							auswahl=1;
-							wert = "Y";
+							nextPlayer = "Y";
 						}
 						spielfeld[q][y] = wert;
 						voll++;
 						if (voll==9) {
-							yaiks=1;
+							going=false;
 						}
 					}
 					else System.err.println("Dieses Feld ist belegt!");	
 				}
 			}
-			else System.err.println("Keine gültige Eingabe");
+			else System.err.println("Keine gÃ¼ltige Eingabe");
 			
 							
 			for (int i = 0; i != 3; ++i) {
@@ -112,20 +112,20 @@ public class TicTacToe_finalVersion {
 
 				if ((spielfeld[i][0] == spielfeld[i][1]) && (spielfeld[i][1] == spielfeld[i][2])) {
 					gewinner = spielfeld[i][1];
-					yaiks = 1;
+					going = false;
 				}
 
 				if ((spielfeld[0][i] == spielfeld[1][i]) && (spielfeld[1][i] == spielfeld[2][i])) {
 					gewinner = spielfeld[1][i];
-					yaiks = 1;
+					going = false;
 				}
 				if ((spielfeld[0][0] == spielfeld[1][1]) && (spielfeld[2][2] == spielfeld[1][1])) {
 					gewinner = spielfeld[1][1];
-					yaiks = 1;
+					going = false;
 				}
 				if ((spielfeld[0][2] == spielfeld[1][1]) && (spielfeld[1][1] == spielfeld[2][0])) {
 					gewinner = spielfeld[1][1];
-					yaiks = 1;
+					going = false;
 				}
 			}
 		}
