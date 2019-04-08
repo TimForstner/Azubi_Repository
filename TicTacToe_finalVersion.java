@@ -16,7 +16,7 @@ public class TicTacToe_finalVersion {
 		int j;
 		int y;
 		int q;
-		String nextPlayer = "";
+		String player = "";
 		String gewinner = "G";
 		byte voll = 0;
 		System.out.println("Welcher Spieler soll beginnen?\n1 für \"X\", 2 für \"Y\"");
@@ -74,7 +74,6 @@ public class TicTacToe_finalVersion {
 				}
 				else {
 					Integer ungueltig = Integer.parseInt(spieler);
-					//ungueltig = Math.abs(ungueltig);
 					String [] wert1 = spieler.split("");
 					q = Integer.parseInt(wert1[0]);
 					y = Integer.parseInt(wert1[1]);
@@ -84,14 +83,14 @@ public class TicTacToe_finalVersion {
 					else if (spieler.equals(spielfeld[q][y])) {			// prüfen ob Feld schon belegt ist
 																		
 						if (auswahl == 1){
-							nextPlayer = "X";
+							player = "X";
 							auswahl=2;
 						}
 						else if (auswahl == 2) {
 							auswahl=1;
-							nextPlayer = "Y";
+							player = "Y";
 						}
-						spielfeld[q][y] = wert;
+						spielfeld[q][y] = player;
 						voll++;
 						if (voll==9) {
 							going=false;
